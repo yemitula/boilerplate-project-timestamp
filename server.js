@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+const port = process.env.PORT || 9090;
 var express = require('express');
 var app = express();
 
@@ -44,6 +45,6 @@ app.get("/api/timestamp", function (req, res) {
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
