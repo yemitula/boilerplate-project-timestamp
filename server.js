@@ -25,6 +25,23 @@ app.get("/api/hello", function (req, res) {
 });
 
 
+// filled timestamp
+app.get("/api/timestamp/:date_string", function (req, res) {
+  const date_generated = isNaN(req.params.date_string) ? new Date(req.params.date_string) : new Date(+req.params.date_string);
+  if(isNaN(date_generated.getTime())) {
+    // invalid date
+    res.json({"error" : "Invalid Date"});
+  } else {
+    // valid date
+    res.json({"unix": date_generated.getTime(), "utc": date_generated.toUTCString()});
+  }
+});
+// empty timestamp endpoint
+app.get("/api/timestamp", function (req, res) {
+  const date_generated = new Date();
+  res.json({"unix": date_generated.getTime(), "utc": date_generated.toUTCString()});
+});
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
